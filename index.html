@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mr.Leo's clothing store</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="top-strip">
+        <span>Free shipping over $50</span>
+        <span>New deals every week</span>
+        <span>Demo shopping experience</span>
+      </div>
+
+      <div class="nav-shell">
+        <a class="brand" href="#shop" aria-label="TrendMart home">
+          <span class="brand-mark">store</span>
+          Mr.Leo's clothing store
+        </a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#shop" data-nav-category="Women">Women</a>
+          <a href="#shop" data-nav-category="Men">Men</a>
+          <a href="#shop" data-nav-category="Shoes">Shoes</a>
+          <a href="#shop" data-nav-category="Deals">Deals</a>
+        </nav>
+
+        <label class="search-box" for="searchInput">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.8-3.8"></path>
+          </svg>
+          <input id="searchInput" type="search" placeholder="Search hoodies, jeans, sneakers..." autocomplete="off" />
+        </label>
+
+        <button class="icon-button" type="button" data-action="open-cart" aria-label="Open cart">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6 6h15l-2 8H8L6 6Z"></path>
+            <path d="M6 6 5 3H2"></path>
+            <circle cx="9" cy="20" r="1.6"></circle>
+            <circle cx="18" cy="20" r="1.6"></circle>
+          </svg>
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="shop-hero" aria-label="Featured clothing promotion">
+        <div class="hero-copy">
+          <p class="eyebrow">Fresh drop</p>
+          <h1>Clothing picks ready for your next outfit.</h1>
+          <p>
+            Browse trending clothes, compare prices, pick your size, and use the demo checkout to practice the buying flow.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#shop">Shop now</a>
+            <a class="secondary-link" href="#how-to-buy">How to buy</a>
+          </div>
+        </div>
+        <div class="hero-visual" role="img" aria-label="Styled outfit laid out with shoes and denim">
+          <div class="deal-badge">
+            <strong>Up to 35% off</strong>
+            <span>Selected outfits</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="quick-guide" id="how-to-buy" aria-labelledby="guideTitle">
+        <div>
+          <p class="eyebrow">Simple checkout</p>
+          <h2 id="guideTitle">How to buy</h2>
+        </div>
+        <ol class="steps">
+          <li><strong>1. Find it</strong><span>Search or filter by category, price, and shipping.</span></li>
+          <li><strong>2. Choose size</strong><span>Pick the size you want on the product card.</span></li>
+          <li><strong>3. Add to cart</strong><span>Review quantity, delivery, and total price.</span></li>
+          <li><strong>4. Checkout</strong><span>Fill the demo form and place a practice order.</span></li>
+        </ol>
+      </section>
+
+      <section class="store-layout" id="shop">
+        <aside class="filters" aria-label="Store filters">
+          <div class="filter-header">
+            <h2>Filters</h2>
+            <button type="button" class="text-button" data-action="reset-filters">Reset</button>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-label">Category</span>
+            <div class="category-list" id="categoryFilters" role="list" aria-label="Product categories"></div>
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label" for="priceRange">Max price: <span id="priceValue">$100</span></label>
+            <input id="priceRange" type="range" min="20" max="100" value="100" />
+          </div>
+
+          <label class="check-row">
+            <input id="shippingFilter" type="checkbox" />
+            <span>Free shipping only</span>
+          </label>
+
+          <div class="filter-group">
+            <label class="filter-label" for="sortSelect">Sort by</label>
+            <select id="sortSelect">
+              <option value="featured">Featured</option>
+              <option value="low">Price: low to high</option>
+              <option value="high">Price: high to low</option>
+              <option value="rating">Best rating</option>
+            </select>
+          </div>
+
+          <div class="buyer-note">
+            <strong>Buyer note</strong>
+            <p>This store is a demo. Products, checkout, and payment fields are for practice only.</p>
+          </div>
+        </aside>
+
+        <section class="catalog" aria-live="polite">
+          <div class="catalog-header">
+            <div>
+              <p class="eyebrow">Online clothing</p>
+              <h2>Featured products</h2>
+            </div>
+            <p id="resultCount" class="result-count"></p>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+      </section>
+    </main>
+
+    <div class="drawer-backdrop" data-action="close-cart" hidden></div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Your cart</p>
+          <h2>Shopping bag</h2>
+        </div>
+        <button class="icon-button plain" type="button" data-action="close-cart" aria-label="Close cart">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="cart-items" id="cartItems"></div>
+
+      <div class="cart-summary">
+        <div class="summary-row"><span>Subtotal</span><strong id="subtotalValue">$0.00</strong></div>
+        <div class="summary-row"><span>Estimated shipping</span><strong id="shippingValue">$0.00</strong></div>
+        <div class="summary-row total"><span>Total</span><strong id="totalValue">$0.00</strong></div>
+        <button class="checkout-button" type="button" data-action="open-checkout">Checkout</button>
+        <p class="secure-note">Demo checkout only. No real payment is charged.</p>
+      </div>
+    </aside>
+
+    <dialog class="checkout-modal" id="checkoutModal">
+      <form method="dialog" class="checkout-form" id="checkoutForm">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Final step</p>
+            <h2>Checkout</h2>
+          </div>
+          <button class="icon-button plain" type="button" data-action="close-checkout" aria-label="Close checkout">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M6 6l12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="checkout-grid">
+          <label>
+            Full name
+            <input required name="name" placeholder="Alex Morgan" />
+          </label>
+          <label>
+            Email
+            <input required type="email" name="email" placeholder="alex@example.com" />
+          </label>
+          <label class="full">
+            Shipping address
+            <input required name="address" placeholder="123 Market Street" />
+          </label>
+          <label>
+            City
+            <input required name="city" placeholder="Miami" />
+          </label>
+          <label>
+            ZIP code
+            <input required name="zip" placeholder="33101" />
+          </label>
+          <label class="full">
+            Demo card number
+            <input required inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242" />
+          </label>
+        </div>
+
+        <div class="modal-summary">
+          <span id="modalItems">0 items</span>
+          <strong id="modalTotal">$0.00</strong>
+        </div>
+
+        <button class="checkout-button" type="submit">Place demo order</button>
+        <p class="secure-note">This is a role-play checkout. Do not enter real payment details.</p>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="site-footer">
+      <span>TrendMart demo store</span>
+      <span>Product photos from Unsplash</span>
+      <span>Built for a practice shopping role-play</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
